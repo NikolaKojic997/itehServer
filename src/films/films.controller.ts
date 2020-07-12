@@ -1,11 +1,19 @@
 import {Controller, Get, Post, Put, Delete, Body, Param} from '@nestjs/common';
-import {CreateFilmDto} from "./dto/Film.entity";
+import {Film} from "./dto/Film.entity";
+import {FilmsService} from "./films.service";
 
 @Controller('films')
 export class FilmsController {
+
+
+    constructor(private readonly filmsService: FilmsService){
+
+    }
+
+
     @Get()
-    findAll() : string{
-        return "Get all films";
+    findAll() : Promise<Film[]>{
+        return this.filmsService.findAll();
     }
 
     @Get(':id')
@@ -14,7 +22,7 @@ export class FilmsController {
     }
 
     @Post()
-    create(@Body() film: CreateFilmDto): string{
+    create(@Body() film: Film): string{
         return `name: ${film.ImeFilma}, godinaProizvodnje: ${film.GodinaProizvodnje}`;
     }
 
@@ -24,7 +32,7 @@ export class FilmsController {
     }
 
     @Put(':id')
-    update(@Body() film: CreateFilmDto, @Param() param ):string{
+    update(@Body() film: Film, @Param() param ):string{
         return `Updating film with id ${param.id}`
     }
 

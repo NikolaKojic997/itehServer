@@ -16,11 +16,17 @@ export class Film{
     @Column()
     Produkcija: string;
 
+
     @ManyToOne(type => Korisnik, korisnik => korisnik.filmovi)
+
     korisnik: Korisnik;
+
     @ManyToOne(type => Reziser, reziser => reziser.filmovi)
+
     reziser: Reziser;
+
     @ManyToOne(type => Zanr, zanr => zanr.filmovi)
+
     zanr: Zanr;
 
 }

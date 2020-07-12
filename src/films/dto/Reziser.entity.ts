@@ -1,6 +1,7 @@
-import {Column, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Film} from "./Film.entity";
 
+@Entity()
 export class Reziser{
     @PrimaryGeneratedColumn()
     ReziserId: number;
