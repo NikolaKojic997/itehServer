@@ -13,7 +13,6 @@ export class FilmsService {
         private filmRepository: Repository<Film>,
     ) {}
 
-
     async  findAll() : Promise<Film[]> {
         return this.filmRepository.find({ relations: ["korisnik", "reziser","zanr"] });
     }
@@ -23,6 +22,6 @@ export class FilmsService {
     }
 
     async create(film:Film) : Promise<Film>{
-        return this.filmRepository.save(film);
+        return this.filmRepository.save(film, { });
     }
 }
