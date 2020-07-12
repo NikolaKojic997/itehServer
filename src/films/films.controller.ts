@@ -17,13 +17,13 @@ export class FilmsController {
     }
 
     @Get(':id')
-    findOne(@Param() param): string{
-        return `film ${param.id}`;
+    findOne(@Param() param): Promise<Film>{
+        return this.filmsService.findOne(param.id);
     }
 
     @Post()
-    create(@Body() film: Film): string{
-        return `name: ${film.ImeFilma}, godinaProizvodnje: ${film.GodinaProizvodnje}`;
+    create(@Body() film: Film):  Promise<Film>{
+        return this.filmsService.create(film);
     }
 
     @Delete(':id')
