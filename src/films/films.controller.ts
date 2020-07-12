@@ -1,5 +1,5 @@
 import {Controller, Get, Post, Put, Delete, Body, Param} from '@nestjs/common';
-import {CreateFilmDto} from "./dto/create.film.dto";
+import {CreateFilmDto} from "./dto/Film.entity";
 
 @Controller('films')
 export class FilmsController {
