@@ -1,17 +1,16 @@
 import {Controller, Get, Post, Put, Delete, Body, Param} from '@nestjs/common';
 import {Film} from "../entity/Film.entity";
 import {FilmsService} from "./films.service";
+import {DeleteResult, UpdateResult} from "typeorm";
 
 @Controller('films')
 export class FilmsController {
 
 
     constructor(private readonly filmsService: FilmsService){
-
     }
 
-
-    @Get()
+     @Get()
     findAll() : Promise<Film[]>{
         return this.filmsService.findAll();
     }
@@ -27,13 +26,13 @@ export class FilmsController {
     }
 
     @Delete(':id')
-    remove(@Param() param): string{
-        return `deleting film ${param.id}`;
+    remove(@Param() param): Promise<DeleteResult>{
+        return this.filmsService.remove(param.id);
     }
 
     @Put(':id')
-    update(@Body() film: Film, @Param() param ):string{
-        return `Updating film with id ${param.id}`
+    update(@Body() film: Film, @Param() param ):Promise<UpdateResult>{
+        return this.filmsService.update(film,param.id);
     }
 
 }
