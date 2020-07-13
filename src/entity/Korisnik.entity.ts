@@ -6,7 +6,7 @@ export class Korisnik{
 
      @PrimaryGeneratedColumn()
      KorisnikId: number;
-     @Column()
+     @Column({unique: true})
      Username: string;
      @Column()
      Password: string;
