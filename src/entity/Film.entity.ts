@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
 import {Korisnik} from "./Korisnik.entity";
 import {Reziser} from "./Reziser.entity";
 import {Zanr} from "./Zanr.entity";
+import {Ocena} from "./Ocena.entity";
 
 @Entity()
 export class Film{
@@ -27,5 +28,7 @@ export class Film{
     @ManyToOne(type => Zanr, zanr => zanr.filmovi, {cascade: true, onUpdate: "CASCADE"})
     @JoinColumn({name: "zanr_id"})
     zanr: Zanr;
+    @OneToMany(type => Ocena, ocena => ocena.film)
+    ocene: Ocena[];
 
 }

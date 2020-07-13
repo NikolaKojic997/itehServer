@@ -1,5 +1,6 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Film} from "./Film.entity";
+import {Ocena} from "./Ocena.entity";
 
 @Entity()
 export class Korisnik{
@@ -15,4 +16,7 @@ export class Korisnik{
 
      @OneToMany(type => Film, film => film.korisnik)
      filmovi: Film[];
+
+     @OneToMany(type => Ocena, ocena => ocena.korisnik)
+     ocene: Ocena[];
 }
