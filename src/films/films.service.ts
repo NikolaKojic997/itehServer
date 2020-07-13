@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import {Film} from "./dto/Film.entity";
-import {Korisnik} from "./dto/Korisnik.entity";
+import {Film} from "../entity/Film.entity";
+// import {Korisnik} from "../entity/Korisnik.entity";
 
 
 @Injectable()
