@@ -4,16 +4,11 @@ import { FilmsModule} from "./films/films.module";
 import { Connection } from 'typeorm';
 import {UsersModule} from "./users/users.module";
 import {GenresModule} from "./genres/genres.module";
-import { GradeController } from './grade/grade.controller';
-import { GradeService } from './grade/grade.service';
-import { GradesController } from './grades/grades.controller';
-import { GradesService } from './grades/grades.service';
+import {GradesModule} from "./grades/grades.module";
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(),FilmsModule, UsersModule, GenresModule],
-  controllers: [GradeController, GradesController],
-  providers: [GradeService, GradesService],
+  imports: [TypeOrmModule.forRoot(),FilmsModule, UsersModule, GenresModule, GradesModule],
 })
 export class AppModule {
   constructor(private connection: Connection) {}
