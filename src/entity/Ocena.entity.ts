@@ -1,9 +1,10 @@
 import {Korisnik} from "./Korisnik.entity";
 import {Film} from "./Film.entity";
-import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm"
+import {Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm"
 
 
 @Entity()
+@Index(["korisnik", "film"], { unique: true })
 export class Ocena{
 
      @PrimaryGeneratedColumn()
