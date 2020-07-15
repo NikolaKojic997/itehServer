@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {DeleteResult, Repository, UpdateResult} from 'typeorm';
 import {Film} from "../entity/Film.entity";
@@ -17,8 +17,15 @@ export class FilmsService {
     }
 
     async findOne(id: number): Promise<Film> {
-       return this.filmRepository.findOne(id, { relations: ["korisnik", "reziser","zanr"] })
-    }
+       const film = await this.filmRepository.findOne(id, { relations: ["korisnik", "reziser","zanr"] })
+       if (!film){
+           throw new HttpException(
+               "Film with given id not found",
+               HttpStatus.BAD_REQUEST
+           )
+       }
+       return film;
+}
 
     // insert reziser first!!
     // Zanr and korisnik will always be in the base
@@ -27,7 +34,14 @@ export class FilmsService {
     }
 
     async remove(id:number) : Promise<DeleteResult>{
-        return this.filmRepository.delete(id);
+        const film = await this.filmRepository.delete(id)
+        if (film.raw.affectedRows === 0){
+            throw new HttpException(
+                "Film with given id not found",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+        return film;
     }
 
     async update(film: Film, id: any): Promise<UpdateResult> {
