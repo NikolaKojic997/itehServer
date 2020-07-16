@@ -2,7 +2,6 @@ import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {DeleteResult, Repository, UpdateResult} from 'typeorm';
 import {Film} from "../entity/Film.entity";
-// import {Korisnik} from "../entity/Korisnik.entity";
 
 @Injectable()
 export class FilmsService {
@@ -29,9 +28,18 @@ export class FilmsService {
 
     // insert reziser first!!
     // Zanr and korisnik will always be in the base
-    async create(film:Film) : Promise<Film>{
-        return this.filmRepository.save(film, { });
+    async create(film:Film) : Promise<boolean>{
+        try {
+            const f = await this.filmRepository.save(film);
+        }
+        catch (e) {
+            throw new HttpException(
+            e.message,
+            HttpStatus.SERVICE_UNAVAILABLE
+        );}
+        return true;
     }
+
 
     async remove(id:number) : Promise<DeleteResult>{
         const film = await this.filmRepository.delete(id)
@@ -44,7 +52,24 @@ export class FilmsService {
         return film;
     }
 
-    async update(film: Film, id: any): Promise<UpdateResult> {
-        return this.filmRepository.update(id,film);
-    }
+    async update(film: Film, id: any): Promise<boolean> {
+        try {
+            const result = await this.filmRepository.update(id, film);
+            if (result.raw.affectedRows === 0) {
+                throw new HttpException(
+                    'Project with given id not found',
+                    HttpStatus.NOT_FOUND
+                );
+            }
+            return true;
+        }
+        catch (error)
+            {
+                if (error instanceof HttpException && error.getStatus() == HttpStatus.NOT_FOUND) throw error;
+                throw new HttpException(
+                    error.message,
+                    HttpStatus.SERVICE_UNAVAILABLE
+                );
+            }
+        }
 }

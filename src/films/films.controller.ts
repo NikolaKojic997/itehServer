@@ -21,7 +21,7 @@ export class FilmsController {
     }
 
     @Post()
-    create(@Body() film: Film):  Promise<Film>{
+    create(@Body() film: Film):  Promise<boolean>{
         return this.filmsService.create(film);
     }
 
@@ -31,7 +31,7 @@ export class FilmsController {
     }
 
     @Put(':id')
-    update(@Body() film: Film, @Param() param ):Promise<UpdateResult>{
+    update(@Body() film: Film, @Param() param ):Promise<boolean>{
         return this.filmsService.update(film,param.id);
     }
 

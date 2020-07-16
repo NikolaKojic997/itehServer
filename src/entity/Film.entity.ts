@@ -1,10 +1,11 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany, Index} from 'typeorm';
 import {Korisnik} from "./Korisnik.entity";
 import {Reziser} from "./Reziser.entity";
 import {Zanr} from "./Zanr.entity";
 import {Ocena} from "./Ocena.entity";
 
 @Entity()
+@Index(["ImeFilma", "GodinaProizvodnje"], { unique: true })
 export class Film{
     @PrimaryGeneratedColumn({name: "Film_Id"})
     FilmId: number;
