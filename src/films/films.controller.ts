@@ -1,9 +1,10 @@
-import {Controller, Get, Post, Put, Delete, Body, Param} from '@nestjs/common';
+import {Controller, Get, Post, Put, Delete, Body, Param, UsePipes, ValidationPipe} from '@nestjs/common';
 import {Film} from "../entity/Film.entity";
 import {FilmsService} from "./films.service";
 import {DeleteResult, UpdateResult} from "typeorm";
 
 @Controller('films')
+@UsePipes(new ValidationPipe())
 export class FilmsController {
 
 

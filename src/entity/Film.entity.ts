@@ -3,19 +3,31 @@ import {Korisnik} from "./Korisnik.entity";
 import {Reziser} from "./Reziser.entity";
 import {Zanr} from "./Zanr.entity";
 import {Ocena} from "./Ocena.entity";
+import {IsString, IsInt, Min, Max, IsPositive} from "class-validator";
 
 @Entity()
 @Index(["ImeFilma", "GodinaProizvodnje"], { unique: true })
 export class Film{
     @PrimaryGeneratedColumn({name: "Film_Id"})
     FilmId: number;
+
     @Column({name: "Ime_Filma"})
+    @IsString()
     ImeFilma: string;
+
     @Column({name: "Godina_proizvodnje"})
+    @IsInt()
+    @Min(1900)
+    @Max(2100)
     GodinaProizvodnje: number;
+
     @Column({name: "Trajanje"})
+    @IsInt()
+    @IsPositive()
     Trajanje: number;
+
     @Column({name: "Produkcija"})
+    @IsString()
     Produkcija: string;
 
     @ManyToOne(type => Korisnik, korisnik => korisnik.filmovi, {cascade: true, onUpdate: "CASCADE"})
