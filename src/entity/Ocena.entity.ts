@@ -1,13 +1,14 @@
 import {Korisnik} from "./Korisnik.entity";
 import {Film} from "./Film.entity";
 import {Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm"
-
+import {IsInt, IsString, Max, Min} from "class-validator"
 
 @Entity()
 @Index(["korisnik", "film"], { unique: true })
 export class Ocena{
 
      @PrimaryGeneratedColumn()
+     @IsInt()
      public ocenaId!: number;
 
      @ManyToOne(type => Korisnik, korisnik => korisnik.ocene,{cascade: true, onUpdate: "CASCADE"})
@@ -19,8 +20,12 @@ export class Ocena{
      film: Film;
 
      @Column({name: "brojcana_ocena"})
+     @IsInt()
+     @Min(0)
+     @Max(10)
      brojcanaOcena: number;
 
-     @Column()
+     @Column({type: "text"})
+     @IsString()
      komentar: string;
 }
