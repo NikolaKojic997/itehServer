@@ -7,7 +7,7 @@ export class Zanr{
     @PrimaryGeneratedColumn()
     @IsInt()
     zanrId: number;
-    
+
     @Column({unique: true})
     @IsString()
     imeZanra: string;

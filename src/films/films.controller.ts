@@ -27,7 +27,7 @@ export class FilmsController {
     }
 
     @Delete(':id')
-    remove(@Param() param): Promise<DeleteResult>{
+    remove(@Param() param): Promise<boolean>{
         return this.filmsService.remove(param.id);
     }
 

@@ -41,7 +41,7 @@ export class FilmsService {
     }
 
 
-    async remove(id:number) : Promise<DeleteResult>{
+    async remove(id:number) : Promise<boolean>{
         const film = await this.filmRepository.delete(id)
         if (film.raw.affectedRows === 0){
             throw new HttpException(
@@ -49,7 +49,7 @@ export class FilmsService {
                 HttpStatus.BAD_REQUEST
             )
         }
-        return film;
+        return true;
     }
 
     async update(film: Film, id: any): Promise<boolean> {
@@ -57,7 +57,7 @@ export class FilmsService {
             const result = await this.filmRepository.update(id, film);
             if (result.raw.affectedRows === 0) {
                 throw new HttpException(
-                    'Project with given id not found',
+                    'Film with given id not found',
                     HttpStatus.NOT_FOUND
                 );
             }

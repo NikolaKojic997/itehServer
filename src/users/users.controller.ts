@@ -19,20 +19,21 @@ export class UsersController {
     @Get(':id')
     findOne(@Param() param): Promise<Korisnik>{
         return this.usersService.findOne(param.id);
+
     }
 
     @Post()
-    create(@Body() korisnik: Korisnik):  Promise<Korisnik>{
+    create(@Body() korisnik: Korisnik):  Promise<boolean>{
         return this.usersService.create(korisnik);
     }
 
     @Delete(':id')
-    remove(@Param() param): Promise<DeleteResult>{
+    remove(@Param() param): Promise<boolean>{
         return this.usersService.remove(param.id);
     }
 
     @Put(':id')
-    update(@Body() korisnik: Korisnik, @Param() param ):Promise<UpdateResult>{
+    update(@Body() korisnik: Korisnik, @Param() param ):Promise<boolean>{
         return this.usersService.update(korisnik,param.id);
     }
 }

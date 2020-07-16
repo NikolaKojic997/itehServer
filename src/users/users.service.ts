@@ -16,18 +16,57 @@ export class UsersService {
     }
 
     async findOne(id: number): Promise<Korisnik> {
-        return this.korisnikRepository.findOne(id);
+        const u = await this.korisnikRepository.findOne(id);
+        if (!u){
+            throw new HttpException(
+                "User with given id not found",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+        return u;
     }
 
-    async create(korisnik: Korisnik): Promise<Korisnik> {
-        return this.korisnikRepository.save(korisnik);
+    async create(korisnik: Korisnik): Promise<boolean> {
+        try {
+            const u = this.korisnikRepository.save(korisnik);
+        }
+        catch (e) {
+            throw new HttpException(
+                e.message,
+                HttpStatus.SERVICE_UNAVAILABLE
+            );}
+        return true;
     }
 
-    async remove(id: number) : Promise<DeleteResult> {
-        return this.korisnikRepository.delete(id);
+    async remove(id: number) : Promise<boolean> {
+        const film = await this.korisnikRepository.delete(id);
+        if (film.raw.affectedRows === 0){
+            throw new HttpException(
+                "User with given id not found",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+        return true;
     }
 
-    async update(korisnik: Korisnik, id: any) : Promise<UpdateResult>{
-        return this.korisnikRepository.update(id, korisnik);
+    async update(korisnik: Korisnik, id: any) : Promise<boolean>{
+        try {
+            const result = await this.korisnikRepository.update(id, korisnik);
+            if (result.raw.affectedRows === 0) {
+                throw new HttpException(
+                    'User with given id not found',
+                    HttpStatus.NOT_FOUND
+                );
+            }
+            return true;
+        }
+        catch (error)
+        {
+            if (error instanceof HttpException && error.getStatus() == HttpStatus.NOT_FOUND) throw error;
+            throw new HttpException(
+                error.message,
+                HttpStatus.SERVICE_UNAVAILABLE
+            );
+        }
     }
 }
