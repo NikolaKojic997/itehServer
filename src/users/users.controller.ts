@@ -15,6 +15,10 @@ export class UsersController {
         return this.usersService.findAll();
     }
 
+    @Get('username/:user')
+    findByUsername(@Param() param) : Promise<Korisnik>{
+        return this.usersService.findByUsername(param.user);
+    }
 
     @Get(':id')
     findOne(@Param() param): Promise<Korisnik>{

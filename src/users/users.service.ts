@@ -29,13 +29,15 @@ export class UsersService {
     async create(korisnik: Korisnik): Promise<boolean> {
         try {
             const u = this.korisnikRepository.save(korisnik);
+            return true;
         }
         catch (e) {
             throw new HttpException(
                 e.message,
                 HttpStatus.SERVICE_UNAVAILABLE
-            );}
-        return true;
+            );
+        }
+        return false;
     }
 
     async remove(id: number) : Promise<boolean> {
@@ -68,5 +70,16 @@ export class UsersService {
                 HttpStatus.SERVICE_UNAVAILABLE
             );
         }
+    }
+
+    async findByUsername(user:string) : Promise<Korisnik> {
+        const u = await this.korisnikRepository.findOne({where: {Username: user}});
+        if (!u){
+            throw new HttpException(
+                "User with given username not found",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+        return u;
     }
 }
