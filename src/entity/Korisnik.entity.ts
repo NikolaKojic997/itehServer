@@ -1,7 +1,7 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Film} from "./Film.entity";
 import {Ocena} from "./Ocena.entity";
-import {IsNumber, IsString} from "class-validator"
+import {IsEmail, IsNumber, IsString} from "class-validator"
 
 @Entity()
 export class Korisnik{
@@ -17,6 +17,11 @@ export class Korisnik{
      @Column()
      @IsString()
      Password: string;
+
+     @Column()
+     @IsString()
+     @IsEmail()
+     Email: string;
 
      @Column()
      @IsString()
