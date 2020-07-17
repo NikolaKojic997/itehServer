@@ -30,6 +30,15 @@ export class Film{
     @IsString()
     Produkcija: string;
 
+
+    @Column({name: "Poster"})
+    @IsString()
+    Poster: string
+
+    @Column({name: "Opis"})
+    @IsString()
+    Opis: string
+
     @ManyToOne(type => Korisnik, korisnik => korisnik.filmovi, {cascade: true, onUpdate: "CASCADE"})
     @JoinColumn({name: "korisnik_id"})
     korisnik: Korisnik;

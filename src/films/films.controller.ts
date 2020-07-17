@@ -11,7 +11,7 @@ export class FilmsController {
     constructor(private readonly filmsService: FilmsService){
     }
 
-     @Get()
+    @Get()
     findAll() : Promise<Film[]>{
         return this.filmsService.findAll();
     }
