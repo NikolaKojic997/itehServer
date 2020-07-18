@@ -26,10 +26,6 @@ export class Film{
     @IsPositive()
     Trajanje: number;
 
-    @Column({name: "Produkcija"})
-    @IsString()
-    Produkcija: string;
-
 
     @Column({name: "Poster"})
     @IsString()

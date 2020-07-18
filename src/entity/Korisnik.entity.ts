@@ -18,9 +18,8 @@ export class Korisnik{
      @IsString()
      Password: string;
 
-     @Column()
+     @Column({unique: true})
      @IsString()
-     @IsEmail()
      Email: string;
 
      @Column()
