@@ -12,7 +12,7 @@ export class Korisnik{
      @IsNumber()
      KorisnikId: number;
 
-     @Column({unique: true})
+     @Column()
      @IsString()
      Username: string;
 
@@ -20,7 +20,7 @@ export class Korisnik{
      @IsString()
      Password: string;
 
-     @Column({unique: true})
+     @Column()
      @IsString()
      Email: string;
 

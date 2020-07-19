@@ -9,7 +9,7 @@ export class Zanr{
     @IsInt()
     zanrId: number;
 
-    @Column({unique: true})
+    @Column()
     @IsString()
     imeZanra: string;
     @OneToMany(type => Film, film => film.zanr)
