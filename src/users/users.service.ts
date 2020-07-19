@@ -12,7 +12,7 @@ export class UsersService {
     ) {}
 
     async findAll() : Promise<Korisnik[]>  {
-        return this.korisnikRepository.find();
+        return await this.korisnikRepository.find();
     }
 
     async findOne(id: number): Promise<Korisnik> {
@@ -28,16 +28,15 @@ export class UsersService {
 
     async create(korisnik: Korisnik): Promise<boolean> {
         try {
-            const u = this.korisnikRepository.save(korisnik);
-            return true;
-        }
+            const u = await this.korisnikRepository.save(korisnik);
+}
         catch (e) {
             throw new HttpException(
                 e.message,
-                HttpStatus.SERVICE_UNAVAILABLE
+                HttpStatus.BAD_REQUEST
             );
         }
-        return false;
+        return true;
     }
 
     async remove(id: number) : Promise<boolean> {
