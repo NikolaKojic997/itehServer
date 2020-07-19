@@ -1,8 +1,9 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, Index, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Film} from "./Film.entity";
 import {IsInt, IsString} from "class-validator"
 
 @Entity()
+@Index(["imeZanra"], { unique: true })
 export class Zanr{
     @PrimaryGeneratedColumn()
     @IsInt()

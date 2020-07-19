@@ -17,7 +17,7 @@ export class DirectorsService {
         catch (e) {
             throw new HttpException(
                 e.message,
-                HttpStatus.SERVICE_UNAVAILABLE
+                HttpStatus.BAD_REQUEST
             );
         }
 
