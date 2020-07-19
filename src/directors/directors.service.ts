@@ -10,9 +10,9 @@ export class DirectorsService {
         private directorsRepository: Repository<Reziser>,
     ) {}
 
-    async create(reziser:Reziser) : Promise<boolean>{
+    async create(reziser:Reziser) : Promise<Reziser>{
         try {
-            const f = await this.directorsRepository.save(reziser);
+            return  await this.directorsRepository.save(reziser);
         }
         catch (e) {
             throw new HttpException(
@@ -20,6 +20,6 @@ export class DirectorsService {
                 HttpStatus.SERVICE_UNAVAILABLE
             );
         }
-        return true;
+
     }
 }

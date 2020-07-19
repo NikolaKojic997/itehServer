@@ -8,7 +8,7 @@ export class DirectorsController {
     }
 
     @Post()
-    create(@Body() reziser: Reziser):  Promise<boolean>{
+    create(@Body() reziser: Reziser):  Promise<Reziser>{
         return this.directorsService.create(reziser);
     }
 

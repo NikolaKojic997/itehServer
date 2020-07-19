@@ -1,7 +1,6 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Catch, Controller, Delete, Get, HttpException, Param, Post, Put} from '@nestjs/common';
 import {UsersService} from "./users.service";
-import {Film} from "../entity/Film.entity";
-import {DeleteResult, UpdateResult} from "typeorm";
+
 import {Korisnik} from "../entity/Korisnik.entity";
 
 @Controller('users')
