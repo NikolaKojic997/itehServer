@@ -11,15 +11,13 @@ export class DirectorsService {
     ) {}
 
     async create(reziser:Reziser) : Promise<Reziser>{
-        try {
-            return  await this.directorsRepository.save(reziser);
-        }
-        catch (e) {
-            throw new HttpException(
-                e.message,
-                HttpStatus.BAD_REQUEST
-            );
+
+        const r = await this.directorsRepository.findOne({where: { imeRezisera: reziser.imeRezisera, prezimeRezisera: reziser.prezimeRezisera }});
+
+        if (!r){
+            return await this.directorsRepository.save(reziser);
         }
 
+        return r;
     }
 }
