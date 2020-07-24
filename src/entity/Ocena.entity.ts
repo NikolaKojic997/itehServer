@@ -8,7 +8,6 @@ import {IsInt, IsString, Max, Min} from "class-validator"
 export class Ocena{
 
      @PrimaryGeneratedColumn()
-     @IsInt()
      public ocenaId: number;
 
      @ManyToOne(type => Korisnik, korisnik => korisnik.ocene,{cascade: true, onUpdate: "CASCADE"})
@@ -22,7 +21,7 @@ export class Ocena{
      @Column({name: "brojcana_ocena"})
      @IsInt()
      @Min(0)
-     @Max(10)
+     @Max(5)
      brojcanaOcena: number;
 
      @Column({type: "text"})
