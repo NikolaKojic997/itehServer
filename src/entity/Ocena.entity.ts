@@ -9,7 +9,7 @@ export class Ocena{
 
      @PrimaryGeneratedColumn()
      @IsInt()
-     public ocenaId!: number;
+     public ocenaId: number;
 
      @ManyToOne(type => Korisnik, korisnik => korisnik.ocene,{cascade: true, onUpdate: "CASCADE"})
      @JoinColumn({name: "korisnikId"})
